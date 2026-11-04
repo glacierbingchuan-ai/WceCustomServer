@@ -1,0 +1,35 @@
+我带过的最差一届 · 客户端补丁
+=====================================
+
+作用：给原版游戏加入“自定义房间 / 自定义服务器”联机功能。
+
+一、全新安装（游戏目录里没有 BepInEx）
+1. 完全退出游戏。
+2. 把本文件夹里的全部内容（winhttp.dll、doorstop_config.ini、CustomServer.cfg、BepInEx 文件夹）
+   一起复制到游戏根目录，也就是 Worst Class Ever.exe 所在的目录。
+3. 双击 Worst Class Ever.exe 启动。首次启动会稍慢（BepInEx 正在初始化）。
+4. 进入登录界面后会自动弹出“自定义服务器”窗口：
+   填写服务器地址（例如 http://127.0.0.1:8080）和你的名字，点“确定”即可。
+
+二、已经装过 BepInEx（或其他 Mod）
+只需把本文件夹中的以下文件复制到游戏目录对应位置（同名文件覆盖）：
+  BepInEx\plugins\CustomServerPlugin.dll
+  CustomServer.cfg
+winhttp.dll 和 BepInEx\core 无需重复覆盖。
+
+三、配置说明（CustomServer.cfg）
+  ApiUrl      房间服务器地址。局域网填服务器内网 IP，公网填服务器公网地址
+  GamePort    本机游戏 UDP 端口，默认 6565，一般不用改
+  PublicHost  仅当服务器关闭 UDP 中继（relayEnabled=false）时才需要填写；开启中继时留空
+  AutoSelect  是否默认选中“自定义服务器”，默认 true
+
+四、常见问题
+- 进游戏没有弹窗：确认 BepInEx\plugins 下有 CustomServerPlugin.dll；
+  可查看游戏目录 BepInEx\LogOutput.log 中的日志。
+- 提示服务器连接失败：确认服务端已启动、地址与端口正确、防火墙放行 TCP 8080。
+- 房间列表为空：房主需要先成功创建房间（游戏内建房后会自动上报）。
+- 杀毒软件报 winhttp.dll：这是 BepInEx 的加载器，属于正常误报，添加信任即可。
+- 想恢复原版：删除 winhttp.dll 和 BepInEx 文件夹即可。
+
+作者：Glacier   2026.11.4
+本内容仅供学习交流，游戏开发殊为不易，若您喜欢，还请支持正版。
